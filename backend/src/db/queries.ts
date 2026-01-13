@@ -49,7 +49,7 @@ export const upsertUser = async (data: NewUser) => {
 
 // Product Queries
 
-export const createPrduct = async (data: NewProduct) => {
+export const createProduct = async (data: NewProduct) => {
   const [product] = await db.insert(products).values(data).returning();
   return product;
 };
