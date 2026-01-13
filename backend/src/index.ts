@@ -1,7 +1,8 @@
-import express from "express"
+import express from "express";
+import cors from "cors";
 import { ENV } from "./config/env";
-import { clerkMiddleware } from '@clerk/express'
-import cors from 'cors';
+import { clerkMiddleware } from '@clerk/express';
+import {User} from "./db/schema";
 
 const app = express();
 const PORT = ENV.PORT;
