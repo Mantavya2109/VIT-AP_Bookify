@@ -27,7 +27,7 @@ export const createComment = async (req: Request, res: Response) => {
     });
     res.status(201).json(comment);
   } catch (error) {
-    console.error("Eroor creating comment", error);
+    console.error("Error creating comment", error);
     res.status(500).json({ error: "Failed to create comment" });
   }
 };
@@ -37,10 +37,10 @@ export const deleteComment = async (req: Request, res: Response) => {
     const { userId } = getAuth(req);
     if (!userId) return res.status(401).json({ error: "Unauthorized" });
 
-    const { CommentId } = req.params;
+    const { commentId } = req.params;
 
     //Check if comment exists and belong to user
-    const existingComment = await queries.getCommentById(String(CommentId));
+    const existingComment = await queries.getCommentById(String(commentId));
     if (!existingComment)
       return res.status(404).json({ error: "Comment not found" });
 
@@ -50,10 +50,10 @@ export const deleteComment = async (req: Request, res: Response) => {
         .json({ error: "You can only delete your own comments" });
     }
 
-    await queries.deleteComment(String(CommentId));
-    res.status(200).json({ error: "Comment deleted successfully" });
+    await queries.deleteComment(String(commentId));
+    res.status(200).json({ message: "Comment deleted successfully" });
   } catch (error) {
-    console.error("Eroor deleting comment", error);
+    console.error("Error deleting comment", error);
     res.status(500).json({ error: "Failed to delete comment" });
   }
 };

@@ -51,7 +51,7 @@ export const createProduct = async (req: Request, res: Response) => {
 
     if (!title || !description || !imageUrl) {
       res
-        .status(404)
+        .status(400)
         .json({ error: "Title, description and imageUrl are required" });
       return;
     }
@@ -118,7 +118,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
     }
 
     await queries.deleteProduct(id as string);
-    res.status(200).json({ message: "Product delete successfully" });
+    res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     console.error("Error deleting product:", error);
     res.status(500).json({ error: "Failed to delete product" });

@@ -22,7 +22,10 @@ export async function syncUser(req: Request, res: Response) {
     });
     res.status(200).json(user);
   } catch (error) {
-    console.error("Error syncing user:", error);
+    console.error(
+      "Error syncing user:",
+      error instanceof Error ? error.message : "Unknown error"
+    );
     res.status(500).json({ error: "Failed to sync user" });
   }
 }
