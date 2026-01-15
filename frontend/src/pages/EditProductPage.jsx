@@ -1,5 +1,5 @@
-function EditPage(){
-    return <div>EditPage</div>
+function EditProductPage() {
+  return <div>EditProductPage</div>;
 }
 
-export default EditPage;
+export default EditProductPage;
