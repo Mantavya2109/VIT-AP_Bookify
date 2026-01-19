@@ -5,9 +5,9 @@ import * as commentController from "../controllers/commentController";
 const router = Router();
 
 // POST /api/comments/:productId - Add comment to product(protected)
-router.post("/:productId", requireAuth, commentController.createComment);
+router.post("/:productId", requireAuth(), commentController.createComment);
 
 // DELETE /api/comments/:commentId - Delete comment (protected)
-router.delete("/:commentId", requireAuth, commentController.deleteComment);
+router.delete("/:commentId", requireAuth(), commentController.deleteComment);
 
 export default router;
