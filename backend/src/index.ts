@@ -10,7 +10,7 @@ import productRoutes from "./routes/productRoutes";
 import commentRoutes from "./routes/commentRoutes";
 
 const app = express();
-const PORT = ENV.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors({ origin: ENV.FRONTEND_URL, credentials: true }));
 app.use(clerkMiddleware());
