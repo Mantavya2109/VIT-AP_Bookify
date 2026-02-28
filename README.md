@@ -1,3 +1,3 @@
 For deployment:
 
--> Use only one directory as both frontend and backend is combined.
+-> Use only one directory as both frontend and backend is combined. use docker
