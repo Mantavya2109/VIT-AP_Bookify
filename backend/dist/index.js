@@ -12,7 +12,7 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
 const commentRoutes_1 = __importDefault(require("./routes/commentRoutes"));
 const app = (0, express_1.default)();
-const PORT = env_1.ENV.PORT;
+const PORT = process.env.PORT;
 app.use((0, cors_1.default)({ origin: env_1.ENV.FRONTEND_URL, credentials: true }));
 app.use((0, express_2.clerkMiddleware)());
 app.use(express_1.default.json());
@@ -33,7 +33,7 @@ app.use("/api/comments", commentRoutes_1.default);
 if (env_1.ENV.NODE_ENV === "production") {
     const __dirname = path_1.default.resolve();
     app.use(express_1.default.static(path_1.default.join(__dirname, "../frontend/dist")));
-    app.get("/{*any}", (req, res) => {
+    app.get("*", (req, res) => {
         res.sendFile(path_1.default.join(__dirname, "../frontend/dist/index.html"));
     });
 }
