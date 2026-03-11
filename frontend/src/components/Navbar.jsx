@@ -20,7 +20,7 @@ function Navbar() {
           <Link to="/" className="btn btn-ghost gap-2">
             <ShoppingBagIcon className="size-5 text-primary" />
             <span className="text-lg font-bold font-mono uppercase tracking-wider">
-              VIT-AP Cashify
+              VIT-AP Bookify
             </span>
           </Link>
         </div>
