@@ -7,9 +7,7 @@ import { SignInButton } from "@clerk/clerk-react";
 
 function HomePage() {
   const { data: products, isLoading, error } = useProducts();
-
   if (isLoading) return <LoadingSpinner />;
-
   if (error) {
     return (
       <div role="alert" className="alert alert-error">
@@ -17,7 +15,6 @@ function HomePage() {
       </div>
     );
   }
-
   return (
     <div className="space-y-10">
       {/* HERO */}
@@ -26,7 +23,7 @@ function HomePage() {
           <div className="relative">
             <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-110" />
             <img
-              src="/image.png"
+              src="/image3.png"
               alt="Creator"
               className="relative h-64 lg:h-72 rounded-2xl shadow-2xl"
             />

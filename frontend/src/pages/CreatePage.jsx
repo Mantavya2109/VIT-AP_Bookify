@@ -35,7 +35,7 @@ function CreatePage() {
         <div className="card-body">
           <h1 className="card-title">
             <SparklesIcon className="size-5 text-primary" />
-            New Product
+            New Book
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
@@ -44,7 +44,7 @@ function CreatePage() {
               <TypeIcon className="size-4 text-base-content/50" />
               <input
                 type="text"
-                placeholder="Product title"
+                placeholder="Book title"
                 className="grow"
                 value={formData.title}
                 onChange={(e) =>
@@ -110,7 +110,7 @@ function CreatePage() {
               {createProduct.isPending ? (
                 <span className="loading loading-spinner" />
               ) : (
-                "Create Product"
+                "Create Book"
               )}
             </button>
           </form>
