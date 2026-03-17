@@ -31,7 +31,7 @@ function Navbar() {
             <>
               <Link to="/create" className="btn btn-primary btn-sm gap-1">
                 <PlusIcon className="size-4" />
-                <span className="hidden sm:inline">New Product</span>
+                <span className="hidden sm:inline">New Book</span>
               </Link>
               <Link to="/profile" className="btn btn-ghost btn-sm gap-1">
                 <UserIcon className="size-4" />
