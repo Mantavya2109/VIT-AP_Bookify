@@ -8,15 +8,52 @@ import { SignInButton } from "@clerk/clerk-react";
 
 function HomePage() {
   const { data: products, isLoading, error } = useProducts();
-  useEffect(() => {
-    try {
-      const pos = sessionStorage.getItem("homeScroll");
-      if (pos) {
-        window.scrollTo({ top: parseInt(pos, 10) || 0, left: 0 });
-        sessionStorage.removeItem("homeScroll");
-      }
-    } catch (e) {}
-  }, []);
+  useEffect(
+    () => {
+      const restore = () => {
+        try {
+          const pos = sessionStorage.getItem("homeScroll");
+          if (!pos) return;
+          const y = parseInt(pos, 10) || 0;
+
+          let tries = 0;
+          const attempt = () => {
+            window.scrollTo({ top: y, left: 0 });
+            tries += 1;
+            // If scroll didn't stick, retry a few times to accommodate mobile/layout
+            if (Math.abs(window.scrollY - y) > 2 && tries < 8) {
+              requestAnimationFrame(() => setTimeout(attempt, 50));
+            } else {
+              try {
+                sessionStorage.removeItem("homeScroll");
+              } catch (e) {}
+            }
+          };
+
+          attempt();
+        } catch (e) {}
+      };
+
+      try {
+        if ("scrollRestoration" in window.history) {
+          window.history.scrollRestoration = "manual";
+        }
+      } catch (e) {}
+
+      restore();
+
+      const onPageShow = (e) => {
+        // pageshow fired when coming from bfcache on mobile/Back navigation
+        if (e.persisted) restore();
+      };
+
+      window.addEventListener("pageshow", onPageShow);
+      return () => window.removeEventListener("pageshow", onPageShow);
+    },
+    [
+      /* run once */
+    ],
+  );
   if (isLoading) return <LoadingSpinner />;
   if (error) {
     return (

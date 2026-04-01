@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import CommentsSection from "./CommentsSection";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useProduct, useDeleteProduct } from "../hooks/useProducts";
 import { useParams, Link, useNavigate } from "react-router";
@@ -20,8 +20,30 @@ function ProductPage() {
   const { data: product, isLoading, error } = useProduct(id);
   const deleteProduct = useDeleteProduct();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0 });
+  useLayoutEffect(() => {
+    try {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+    } catch (e) {}
+
+    const toTop = () => {
+      try {
+        window.scrollTo({ top: 0, left: 0 });
+      } catch (e) {}
+    };
+
+    // force top immediately and ensure it sticks on mobile/bfcache
+    toTop();
+    const onPageShow = (e) => {
+      if (e.persisted) {
+        // small timeout to allow layout/images to settle
+        setTimeout(toTop, 0);
+      }
+    };
+
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
   }, [id]);
 
   const handleDelete = () => {
