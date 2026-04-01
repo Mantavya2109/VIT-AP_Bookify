@@ -6,9 +6,16 @@ const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 const ProductCard = ({ product }) => {
   const isNew = new Date(product.createdAt) > oneWeekAgo;
 
+  const handleClick = () => {
+    try {
+      sessionStorage.setItem("homeScroll", String(window.scrollY || 0));
+    } catch (e) {}
+  };
+
   return (
     <Link
       to={`/product/${product.id}`}
+      onClick={handleClick}
       className="card bg-base-300 hover:bg-base-200 transition-colors"
     >
       <figure className="px-4 pt-4">
