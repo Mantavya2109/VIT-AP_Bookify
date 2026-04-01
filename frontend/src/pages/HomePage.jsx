@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useProducts } from "../hooks/useProducts";
 import { PackageIcon, SparklesIcon } from "lucide-react";
 import { Link } from "react-router";
@@ -7,6 +8,15 @@ import { SignInButton } from "@clerk/clerk-react";
 
 function HomePage() {
   const { data: products, isLoading, error } = useProducts();
+  useEffect(() => {
+    try {
+      const pos = sessionStorage.getItem("homeScroll");
+      if (pos) {
+        window.scrollTo({ top: parseInt(pos, 10) || 0, left: 0 });
+        sessionStorage.removeItem("homeScroll");
+      }
+    } catch (e) {}
+  }, []);
   if (isLoading) return <LoadingSpinner />;
   if (error) {
     return (
