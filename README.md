@@ -1,4 +1,4 @@
-# Bookify Full Stack (Monorepo)
+# Bookify Full Stack 
 
 # Hosted- https://vit-ap-bookify-1.onrender.com
 
